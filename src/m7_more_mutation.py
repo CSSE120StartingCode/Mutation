@@ -1,18 +1,22 @@
 """
 This module lets you practice   MUTATION   of objects
-by changing the values of instance variables.
+by RE-ASSIGNING instance variables of objects.
 
-Authors: David Mutchler, Amanda Stouder, Chandan Rupakheti, Katie Dion,
-         Claude Anderson, Delvin Defoe, Curt Clifton, their colleagues,
-         and PUT_YOUR_NAME_HERE.
+Authors: David Mutchler, Vibha Alangar, Dave Fisher, Matt Boutell, Mark Hays,
+         Mohammed Noureddine, Sana Ebrahimi, Sriram Mohan, their colleagues and
+         PUT_YOUR_NAME_HERE.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
-    run_test_RETURN_circle()
-    run_test_MUTATE_circle()
+    """ Calls the other functions to test them. """
+    print()
+    print("Un-comment and re-comment calls in MAIN one by one as you work.")
+
+    # run_test_RETURN_circle()
+    # run_test_MUTATE_circle()
 
 
 def run_test_RETURN_circle():
@@ -24,20 +28,20 @@ def run_test_RETURN_circle():
 
     print()
     print('See the graphics window for this test.')
-    print('If an error msg appears at any point,')
+    print('If an error message appears at any point,')
     print('then you have FAILED this test.')
 
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Tests 1 and 2 (on one window):
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     window = rg.RoseWindow(500, 400, 'Testing RETURN_circle')
     text = rg.Text(rg.Point(250, 125), '')
-    text.attach_to(window.initial_canvas)
+    text.attach_to(window)
 
     circle = rg.Circle(rg.Point(200, 300), 50)
     circle.fill_color = 'blue'
 
-    circle.attach_to(window.initial_canvas)
+    circle.attach_to(window)
 
     msg = 'Note: If you see an error message at ANY point,\n'
     msg = msg + 'then you have failed this test.\n\n'
@@ -52,7 +56,7 @@ def run_test_RETURN_circle():
     new_circle = RETURN_circle(circle, 'red')
 
     if new_circle:
-        new_circle.attach_to(window.initial_canvas)
+        new_circle.attach_to(window)
 
     msg = 'I have now called your   RETURN_circle   function\n'
     msg = msg + 'and drawn the CLONED, RED circle that your\n'
@@ -66,7 +70,7 @@ def run_test_RETURN_circle():
     window.get_next_mouse_click()
 
     if new_circle:
-        new_circle.detach_from(window.initial_canvas)
+        new_circle.detach_from(window)
 
     msg = 'I have now UN-drawn the CLONED, RED circle.\n\n'
     msg = msg + 'So you should see the original, BLUE circle below\n'
@@ -76,7 +80,7 @@ def run_test_RETURN_circle():
     window.render(0.5)
     window.get_next_mouse_click()
 
-    circle.detach_from(window.initial_canvas)
+    circle.detach_from(window)
 
     msg = 'I have now UN-drawn the ORIGINAL, blue circle.\n\n'
     msg = msg + 'So you should see NO circles below.\n\n'
@@ -86,7 +90,7 @@ def run_test_RETURN_circle():
     window.get_next_mouse_click()
 
     if new_circle:
-        new_circle.attach_to(window.initial_canvas)
+        new_circle.attach_to(window)
 
     msg = 'Now I have RE-drawn the CLONED, RED circle\n'
     msg = msg + 'that your   RETURN_circle   function\n'
@@ -98,17 +102,17 @@ def run_test_RETURN_circle():
     window.render(0.5)
     window.get_next_mouse_click()
 
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Note: The following statements make the variable  new_circle
     #       refer to a new, green circle.  So we can no longer refer
     #       to the RED circle (to which the variable  new_circle  once
     #       referred).  But the red circle still exists!
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     new_circle = RETURN_circle(circle, 'green')
 
     if new_circle:
-        new_circle.attach_to(window.initial_canvas)
+        new_circle.attach_to(window)
 
     msg = 'Now I have ALSO drawn the CLONED, GREEN circle\n'
     msg = msg + 'that your   RETURN_circle   function\n'
@@ -122,7 +126,7 @@ def run_test_RETURN_circle():
     window.get_next_mouse_click()
 
     if new_circle:
-        new_circle.detach_from(window.initial_canvas)
+        new_circle.detach_from(window)
 
     msg = 'I have now UN-drawn the CLONED, GREEN circle.\n\n'
     msg = msg + 'So you should see the cloned, RED circle below\n'
@@ -136,9 +140,9 @@ def run_test_RETURN_circle():
                                 'white')
 
     if new_circle:
-        new_circle.attach_to(window.initial_canvas)
+        new_circle.attach_to(window)
     if new_circle2:
-        new_circle2.attach_to(window.initial_canvas)
+        new_circle2.attach_to(window)
 
     msg = 'I have now RE-drawn the CLONED, GREEN circle.\n'
     msg = msg + 'Additionally, I called your   RETURN_circle   function\n'
@@ -165,16 +169,17 @@ def RETURN_circle(circle, color):
 
     Preconditions:
       :type circle:  rg.Circle
-      :type color: (str, rg.Color)
+      :type color: str | rg.Color
     where the color is either a string that Rosegraphics understands
     or a rg.Color object.
     """
+    # -------------------------------------------------------------------------
     # TODO: 2. First, READ THE ABOVE TEST CODE.
     #          Make sure that you understand it.
     #          Then, IMPLEMENT and test THIS FUNCTION
     #          (using the above code for testing).
-    #
-    # HINT: Use the   clone   method to make the copy.
+    #  HINT: Use the   clone   method to make the copy.
+    # -------------------------------------------------------------------------
 
 
 def run_test_MUTATE_circle():
@@ -299,18 +304,18 @@ def MUTATE_circle(circle, color, n):
     This function must NOT return anything (other than the default None).
 
     Precondition: The first argument is a rg.Circle and the second
-                  argument is a color appropriate for Zellegraphics.
+                  argument is a color appropriate for RoseGraphics.
     """
+    # -------------------------------------------------------------------------
     # TODO: 3. First, READ THE ABOVE TEST CODE.
     #          Make sure that you understand it.
     #          Then, IMPLEMENT and test THIS FUNCTION
     #          (using the above code for testing).
-    # HINT: This function can be implemented with just TWO lines of code.
+    #   HINT: This function can be implemented with just TWO lines of code.
+    # -------------------------------------------------------------------------
 
 
-# ----------------------------------------------------------------------
-# If this module is running at the top level (as opposed to being
-# imported by another module), then call the 'main' function.
-# ----------------------------------------------------------------------
-if __name__ == '__main__':
-    main()
+# -----------------------------------------------------------------------------
+# Calls  main  to start the ball rolling.
+# -----------------------------------------------------------------------------
+main()

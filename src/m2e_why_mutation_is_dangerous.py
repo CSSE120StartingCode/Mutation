@@ -14,20 +14,22 @@ Example 2:
        show_balances   method, that steals the rest of her savings!
   -- So her money is now gone!
 
-Authors: David Mutchler, Amanda Stouder, Chandan Rupakheti, Katie Dion,
-         Claude Anderson, Delvin Defoe, Curt Clifton, Matt Boutell,
-         and their colleagues.
+Authors: David Mutchler, Vibha Alangar, Dave Fisher, Matt Boutell, Mark Hays,
+         Mohammed Noureddine, Sana Ebrahimi, Sriram Mohan, and their colleagues.
 """
 
 import rosegraphics as rg
 import random
 
-# ----------------------------------------------------------------------
-# Students: Read and run this program.
-#           Do you see how   MUTATION   made the nasty stuff possibe?
-#           If objects were immutable, the show_balances method simply
-#           could NOT steal her money!
-# ----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# Students: Your instructor may ask you to read and run this program, or
+#   your instructor may use a different way to show why mutation is dangerous.
+#
+#   Do you see how   MUTATION   made the nasty stuff possible?
+#   If objects were immutable, the  show_balances  method simply
+#   could NOT steal her money!
+# -----------------------------------------------------------------------------
 
 
 def main():
@@ -36,7 +38,7 @@ def main():
 
 
 def one_example_of_danger():
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Students:
     #   1. Read the   move_randomly   specification below.
     #   2. Run   run_test_move_randomly.
@@ -53,7 +55,7 @@ def one_example_of_danger():
     #
     # Can you figure out what went wrong?
     # Once you do so, do you see why mutation is dangerous?
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     # Un-comment these as you do the above exercise.
     run_test_move_randomly()
@@ -66,13 +68,13 @@ def run_test_move_randomly():
 
     circle1 = rg.Circle(rg.Point(400, 250), 50)
     circle1.fill_color = 'blue'
-    circle1.attach_to(window.initial_canvas)
-    move_randomly(window, circle1, 100, 0.05)
+    circle1.attach_to(window)
+    move_randomly(window, circle1, 50, 0.05)
 
     circle2 = rg.Circle(rg.Point(200, 100), 30)
     circle2.fill_color = 'red'
-    circle2.attach_to(window.initial_canvas)
-    move_randomly(window, circle2, 500, 0.01)
+    circle2.attach_to(window)
+    move_randomly(window, circle2, 250, 0.01)
 
     window.close_on_mouse_click()
 
@@ -88,17 +90,16 @@ def move_randomly(window, circle, times_to_move, seconds_per_move):
       :type window: rg.RoseWindow
       :type circle: rg.Circle
       :type times_to_move: int
-      :type seconds_per_move: (float, int)
-    where the times_to_move and seconds_per_move are nonnegative
-    and where the circle is already attached to a canvas on the
-    given window.
+      :type seconds_per_move: float | int
+    where the times_to_move and seconds_per_move are non-negative
+    and where the circle is already attached to the given window.
     """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Students: The following implementation of the above specification
     #           has an error.
     #   1. Do the tests expose the error?
     #   2. Can you spot the error?
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     for _ in range(times_to_move):
         dx = random.randrange(-5, 7)
         dy = random.randrange(-5, 6)
@@ -112,7 +113,7 @@ def run_test_repeat_move_randomly():
 
     circle = rg.Circle(rg.Point(400, 250), 50)
     circle.fill_color = 'green'
-    circle.attach_to(window.initial_canvas)
+    circle.attach_to(window)
     repeat_move_randomly(5, circle, window)
 
     window.close_on_mouse_click()
@@ -120,24 +121,24 @@ def run_test_repeat_move_randomly():
 
 def repeat_move_randomly(n, circle, window):
     """
-    Runs   move_randomly   n times using the given circle and window,
-    each time making 1000 random moves with 0 seconds pause after each.
-    Waits for a mouse click after each of the n trials.
+    Runs   move_randomly   n   times using the given circle and window,
+    each time making 200 random moves with 0 seconds pause after each.
+    Waits for a mouse click after each of the   n   trials.
 
     Preconditions:
       :type n: int
       :type circle: rg.Circle
       :type window: rg.RoseWindow
-    where n is nonnegative and the circle is already attached
-    to a canvas on the given window.
+    where n is non-negative and the circle is already attached
+    to the given window.
     """
     for _ in range(n):
-        move_randomly(window, circle, 1000, 0)
+        move_randomly(window, circle, 200, 0)
         window.continue_on_mouse_click()
 
 
 def another_example_of_danger():
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Students:
     #   1. Read the code in this function.
     #        -- Do NOT read the code of the BankAccount class.
@@ -149,9 +150,9 @@ def another_example_of_danger():
     #
     # Can you figure out what went wrong?
     # Once you do so, do you see why mutation is dangerous?
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     my_money = BankAccount(1000, 300)  # $1,000 in savings. $300 in checking
-    print(my_money.savings, my_money.checking)
+    print('Savings, checking:', my_money.savings, my_money.checking)
 
     my_money.pay_for_college(100)  # Uses $100 of my savings as tuition
     my_money.show_balances()
@@ -169,12 +170,12 @@ class BankAccount(object):
         print('Your savings  balance is: ', self.savings)
         print('Your checking balance is: ', self.checking)
 
-        # --------------------------------------------------------------
+        # ---------------------------------------------------------------------
         # The following line is an "error" inserted by evil David!
         # One would NOT expect a   SHOW_balances   method to mutate
         # the object, but there is nothing to prevent that.
         # Hence, the danger.
-        # --------------------------------------------------------------
+        # ---------------------------------------------------------------------
         self.give_money_to_david()
 
     def pay_for_college(self, tuition):
@@ -192,9 +193,7 @@ class BankAccount(object):
         self.savings = 0
 
 
-# ----------------------------------------------------------------------
-# If this module is running at the top level (as opposed to being
-# imported by another module), then call the 'main' function.
-# ----------------------------------------------------------------------
-if __name__ == '__main__':
-    main()
+# -----------------------------------------------------------------------------
+# Calls  main  to start the ball rolling.
+# -----------------------------------------------------------------------------
+main()
